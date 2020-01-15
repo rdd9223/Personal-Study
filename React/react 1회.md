@@ -267,3 +267,133 @@ const aaa = <a> asd <a/>
 
 ### lifecycle 사용해보기
 
+### event
+
+-   사건
+
+    -   특정 사건을 의미
+
+    -   버튼클릭 이벤트 -> 사용자가 버튼을 클릭한 사건
+
+    -   camelCase를 따름
+
+        ```react
+        <button onClick={activateLasers}>
+        	Activate Lasers
+        </button>
+        ```
+
+-   event handler
+
+    -   이벤트를 처리하는 함수
+
+    -   어떤 사건이 발생하면, 사건을 처리하는 역할
+
+    -   이벤트 리스너라고도 불리기도 함
+
+    -   어떻게 추가할까?
+
+        -   bind를 사용, 바인드를 해야지 무조건 사용할 수 있음
+        -   class field Syntax사용
+            -   컨트스트럭터 부분에서 바인딩 x
+            -   에러부분에서 사용 (실험적인 부분이 있다)
+            -   이부분이 더 많이 쓰임
+            -   함수 선언 후 계속 사용
+        -   Arrow 펑션을 이용하는 방법
+            -   직접 사용
+            -   계속 다른 콜백함수를 보내는 단점이 있음
+            -   로깅버튼이 렌더링 될때마다임
+            -   하위 컴포넌트의 prop으로 넘어가게 되면 추가적인 렌더링이 필요해져버림
+            -   다른 방법 사용하는 것을 권장
+
+    -   Event Handler에 Arguments전달하기
+
+        -   아규먼트
+
+            -   논쟁, ㅁ말다툼, 주장
+            -   함수에 주장할 내용, 전달할 데이터라고 생각 해라
+            -   파라미터라고도 부른다
+
+        -   방식
+
+            ```react
+            // id 라는 argument를 deleteRow 함수에 전달
+            // Arrow Function
+            <button onClick={(e) => this.deleteRow(id, e)}>Delete Row</button>
+            // used bind
+            <button onClick={this.deleteRow.bind(this, id)}>Delete Row</button>
+            ```
+
+### Conditional Rendering
+
+-   Condition
+
+    -   조건이라는 뜻
+
+-   조건에 따른 렌더링
+
+-   예) true이면 버튼을 보여주고, false이면 버튼을 가린다.
+
+    ```react
+    function UserGreeting(props) {
+        return <h1>Welcome back!</h1>;
+    }
+    
+    function GuestGreeting(props) {
+        return <h1>Please sign up.</h1>;
+    }
+    ```
+
+-   element variable
+
+-   inline condition
+
+    -   조건을 코드 안에 집어넣는 것
+
+    -   if문 경우 &&를 사용
+
+        -   true && expression => expression
+
+        -   false && expression => false
+
+            ```react
+            <div>
+                <h1>
+                    hello!
+                </h1>
+                {unreadMessages.length > 0 && 
+                	<h2>
+                        You have {undeadMessages.length} unread messages.
+                	</h2>
+                }
+            </div>
+            ```
+
+    -   if-else문의 경우 ?를 사용
+
+        -   condition ? true : false
+
+            ```react
+            const isLoggedIn = this.state.isLoggedIn;
+            return (
+            	<div>
+            		the user is <b>{isLoggedIn ? 'currently' : 'not'}</b> logged in.
+            	</div>
+            )
+            // 또는 로그인 버튼과 로그아웃 버튼 렌더링
+            return (
+            	<div>
+                	{isLoggedIn ? (
+                    	<LogoutButton onClick={this.handleLogoutClick} />
+                    ) : (
+                    	<LoginButton onClick={this.handleLoginClick} />
+                    )}
+                </div>
+            );
+            ```
+
+-   컴포넌트의 렌더링 막기
+    -   null을 리턴하면 렌더링되지 않음
+
+### 로그인버튼 렌더링하기
+

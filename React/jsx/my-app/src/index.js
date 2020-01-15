@@ -3,9 +3,19 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
+import Chapter06 from './Chapter06';
+import Greeting from './Chapter07/Greeting'
+import LoginControl from './Chapter07/LoginControl'
+
+// Chapter07
+// ReactDOM.render(<Greeting isLoggedIn={true}/>, document.getElementById('root'));
+ReactDOM.render(<LoginControl />, document.getElementById('root'));
+
+// Chapter06
+// ReactDOM.render(<Chapter06 />, document.getElementById('root'));
 
 // 이거는 원래 있던거
-ReactDOM.render(<App />, document.getElementById('root'));
+// ReactDOM.render(<App />, document.getElementById('root'));
 
 // // 함수 처리
 // const formatName = name => name.firstName + " " + name.lastName;
