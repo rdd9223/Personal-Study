@@ -6,10 +6,14 @@ import * as serviceWorker from './serviceWorker';
 import Chapter06 from './Chapter06';
 import Greeting from './Chapter07/Greeting'
 import LoginControl from './Chapter07/LoginControl'
+import AttendanceBook from './Chapter08/AttendanceBook';
+
+// Chapter08
+ReactDOM.render(<AttendanceBook />, document.getElementById('root'));
 
 // Chapter07
 // ReactDOM.render(<Greeting isLoggedIn={true}/>, document.getElementById('root'));
-ReactDOM.render(<LoginControl />, document.getElementById('root'));
+// ReactDOM.render(<LoginControl />, document.getElementById('root'));
 
 // Chapter06
 // ReactDOM.render(<Chapter06 />, document.getElementById('root'));
