@@ -7,9 +7,13 @@ import Chapter06 from './Chapter06';
 import Greeting from './Chapter07/Greeting'
 import LoginControl from './Chapter07/LoginControl'
 import AttendanceBook from './Chapter08/AttendanceBook';
+import SignUp from './Chapter09/SignUp';
+
+// Chapter09
+ReactDOM.render(<SignUp />, document.getElementById('root'));
 
 // Chapter08
-ReactDOM.render(<AttendanceBook />, document.getElementById('root'));
+// ReactDOM.render(<AttendanceBook />, document.getElementById('root'));
 
 // Chapter07
 // ReactDOM.render(<Greeting isLoggedIn={true}/>, document.getElementById('root'));
