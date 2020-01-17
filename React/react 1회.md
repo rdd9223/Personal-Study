@@ -10,7 +10,9 @@
 
 -   웹사이트: reactjs.org/docs/add-react-to-a-website.html
 
-### jsx
+---
+
+## jsx
 
 -   jsx는 자바스크립트의 문법 확장자다 (js + XML/HTML)
 
@@ -90,7 +92,9 @@ const aaa = <a> asd <a/>
     );
     ```
 
-### elements란?
+---
+
+## elements란?
 
 -   요소, 성분이라는 뜻을 가지고 있음
 -   리엑트에서는 리엑트 앱을 구성하는 가장작은 빌딩 블록이다.
@@ -137,9 +141,9 @@ const aaa = <a> asd <a/>
     setInterval(tick, 1000);
     ```
 
-    
+---
 
-### 컴포넌트와 프로퍼티
+## 컴포넌트와 프로퍼티
 
 -   컴포넌트: 구성요소
     -   react는 component-Based
@@ -157,7 +161,7 @@ const aaa = <a> asd <a/>
 
 ### 자바스크립트를 통한 예시
 
--   pure: input을 변경하지 않으며, 가틍ㄴ 잇풋에 대해서 항상 같은 output을 리턴하는 것
+-   pure: input을 변경하지 않으며, 같은 인풋에 대해서 항상 같은 output을 리턴하는 것
 
     ```js
     function sum (a, b) {
@@ -236,7 +240,9 @@ const aaa = <a> asd <a/>
 -   너무 지저분해 보이면 CSS코드를 분리
 -   app.js와 Comment.js 를 참조할 것
 
-### State and Lifecycle
+---
+
+## State and Lifecycle
 
 -   굉장히 중요한 내용이다. 까먹지 말고 반복적으로 할것
 -   State (상태)
@@ -267,7 +273,9 @@ const aaa = <a> asd <a/>
 
 ### lifecycle 사용해보기
 
-### event
+---
+
+## event
 
 -   사건
 
@@ -324,7 +332,9 @@ const aaa = <a> asd <a/>
             <button onClick={this.deleteRow.bind(this, id)}>Delete Row</button>
             ```
 
-### Conditional Rendering
+---
+
+## Conditional Rendering
 
 -   Condition
 
@@ -393,7 +403,350 @@ const aaa = <a> asd <a/>
             ```
 
 -   컴포넌트의 렌더링 막기
+    
     -   null을 리턴하면 렌더링되지 않음
 
 ### 로그인버튼 렌더링하기
+
+---
+
+## Lists and Keys
+
+-   list
+
+    -   목록이라는 의미
+    -   Array로 나타내는데 JS의 변수나 객체들을 하나의 변수로 묶어놓은것
+    -   const numbers = [1,2,3,4,5]; 이런식
+    -   react에서는 Array를 사용하여 다수의 Element를 렌더링 할 수 있다.
+    -   javascript의 map함수를 이용해서 사용
+    -   별도의 component로 만들기
+
+-   Keys
+
+    -   열쇠라는 의미
+
+    -   열쇠들은 모양이 같지 않다.
+
+    -   아이템들을 구분하기 위한 고유한 문자열
+
+    -   ex 주민등록번호, 학번, 핸드폰 번호, 여권번호 등등
+
+    -   key의 값은  해당 element안에서만 고유한 값이면 된다
+
+    -   key로 값을 사용하는 경우
+
+        ```react
+        const numbers = [1,2,3,4,5];
+        const listItems = numbers.map((number) =>
+        	<li key={number.toString()}>
+            	{number} 
+        	</li>
+        );
+        ```
+
+    -   key로 객체의 ID를 사용하는 경우
+
+        ```react
+        const todoItems = todos.map((todo) => 
+        	<li key={todo.id}>
+            	{todo.text} 
+        	</li>
+        );
+        ```
+
+    -   key로 index를 사용하는 경우
+
+        ```react
+        const todoItems = todos.map((todo, index) => 
+            // Only do this if items have no stable IDs
+            // idx를 사용하면 안되는 이유가 idx순서가 항상 바뀔수 있기때문에 구분은 가능하지만 key의 조건은 충족하지 못함
+        	<li key={index}>
+            	{todo.text} 
+        	</li>
+        );
+        ```
+
+-   Key를 이용하여 ListItem Component 만들기
+
+-   List의 아이템을 Component로 분리!
+
+-   map() 안에 있는 element는 키가 꼭 필요하다!
+
+-   key는 props로 전달되지 않는다!
+
+    ```react
+    // 굳이 props로 넘겨주고 싶다면 key라는 것을 하나 만들어서 id값을 대입해 넣어줘야 한다.
+    const content = posts.map((post) =>
+    	<Post
+            key={post.id}
+            id={post.id}
+            title={post.title} />
+    );
+    ```
+
+-   JSX안에 map()넣기
+
+    ```react
+    function NumberList(props) {
+        const numbers = props.numbers;
+        return (
+        	<ul>
+                {numbers.map((number) => 
+    				<ListItem key={number.toString()}
+                        	   value={number} />
+                )}
+            </ul>
+        );
+    }
+    ```
+
+### 출석부 출력하기
+
+---
+
+## Forms
+
+### Form 이란?
+
+-   양식
+
+-   사용자로부터 입력을 받기위해 사용
+
+-   예시: HTML form
+
+    ```html
+    <form>
+        <label>
+        	Name:
+        	<input type="text" name="name" />
+        </label>
+        <input type="submit" value="Submit" />
+    </form>
+    ```
+
+### Controllen Components
+
+-   누군가의 통제를 받는 컴포넌트
+
+-   그 값이 React의 통제를 받는 input on element이다.
+
+-   모든 데이터를 state에서 관리한다.
+
+-   사용자의 입력을 직접적으로 제어할 수 있다.
+
+    -   모든 입력값을 대문자로 변경하기
+
+        ```react
+        handleChange(event) {
+            this.setState({value: event.target.value.toUpperCase()});
+        }
+        // input값의 변화가 모두 handleChange()에서 처리되기 때문에, 원하는대로 사용자의 입력을 제어할 수 있다.
+        ```
+
+    -   응용하면 내가 원하지 않는 값을 입력하면 경고창을 띄우거나 할 수 있다.
+
+### Text area
+
+-   HTML textarea tag
+
+    ```HTML
+    <textarea>
+    	Hello there, this is some text in a text area
+    </textarea>
+    ```
+
+### Select Tag
+
+-   HTML select tag
+
+    ```html
+    <select>
+        <option value="grapefruit">Grapefruit</option>
+        <option value="lime">Lime</option>
+        <option selected value="coconut">Coconut</option>
+        <option value="mango">Mango</option>
+    </select>
+    ```
+
+-   다수의 옵션 중에서 하나 또는 여러개를 선택할 수 있도록 한다.
+
+    ```react
+    <select multiple={true} value={['B', 'C']}></select>
+    ```
+
+### File Input Tag
+
+-   HTML fileinput tag
+
+    ```react
+    <input type="file" />
+    ```
+
+-   Uncontrolled Component : 읽기만 할 수 있기 때문에 제어할 수 없다.
+
+### Multiple Inputs
+
+-   ![image-20200117002141321](C:\Users\rdd92\AppData\Roaming\Typora\typora-user-images\image-20200117002141321.png)
+
+### Input Null Value
+
+-   초반에 input 값이 정해져 있어서 입력불가 상태였다가, 1초뒤에 입력 가능한 상태로 바뀜
+
+    ```react
+    ReactDom.render(<input value="hi" />, mountNode);
+    
+    setTimeout(function() {
+        ReactDom.render(<input value={null} />, mountNode);
+    }, 1000);
+    ```
+
+### 사용자 정보 입력받기 (실습)
+
+---
+
+## 공통된 state 다루기
+
+### Lifting State Up
+
+-   Shared State
+
+    -   state에 있는 데이터를 여러개의 하위 컴포넌트에서 공통적으로 사용하는 경우
+    -   ![image-20200117112657186](C:\Users\rdd92\AppData\Roaming\Typora\typora-user-images\image-20200117112657186.png)
+    -   부모자식 관계가 아니다.
+    -   모두 하나의 값을 사용한다!
+    -   하위 컴포넌트들이 각자 State에 데이터를 갖고 있을 필요가 없다.
+
+-   Temperture Calculator
+
+    -   섭씨 온도값에 따라서 물이 끓는지 여부를 리턴하는 컴포넌트
+
+        ```react
+        function BoilingVerdict(props) {
+            if (props.celsius >= 100) {
+                return <p>The water would boil.</p>;
+            }
+            return <p>The water would not boil.</p>;
+        }
+        ```
+
+    -   하위 컴포넌트의 state를 공통 상위 컴포넌트로 올림
+
+---
+
+## Composition 과 Inheritance
+
+### Composition vs Inheritance
+
+-   composition
+
+    -   구성이라는 뜻을 가짐
+
+    -   여러개의 컴포넌트를 합쳐서(구성해서)새로운 컴포넌트를 만드는 것
+
+    -   composition 사용기법
+
+        -   containment
+
+        -   보통 sidebar 나 dialog같은 box형태의 컴포넌트는 자신의 하위 컴포넌트를 미리 알 수 없다.
+
+        -   이런 경우에 children이라는 prop을 사용해서 조합
+
+        -   ```react
+            // children prop을 사용한 FancyBorder 컴포넌트
+            function FancyBorder(props) {
+                return(
+                	<div className={'FancyBorder FancyBorder-' + props.color}>
+                        {props.children}
+                    </div>
+                );
+            }
+            
+            // FancyBorder 컴포넌트 안에 있는 모든 JSX태그는 children으로 전달됨
+            function WelcomeDialog() {
+                return (
+                	<FancyBorder color="blue">
+                    	<h1 className="Dialog-title">
+                        	Welcome
+                        </h1>
+                        <p className="Dialog-message">
+                        	Thank you for visiting our spacecraft!
+                        </p>
+                    </FancyBorder>
+                );
+            }
+            ```
+
+        -   여러개의 children 집합이 필요한 경우는 어떻게 할까?
+
+        -   ```react
+            // left와 right로 구분하여 prop을 만듬
+            function SplitPane(props) {
+                return (
+                	<div className="SplitPane">
+                    	<div className="SplitPane-left">
+                        	{props.left}
+                        </div>
+                        <div className="SplitPane-right">
+                        	{props.right}
+                        </div>
+                    </div>
+                );
+            }
+            
+            // left와 right에 각각 렌더링할 컴포넌트를 넣어줌
+            function App() {
+                return (
+                	<SplitPane
+                        left={
+                            <Contacts />
+                        }
+                        right={
+                            <Chat />
+                        } />
+                );
+            }
+            ```
+
+    -   Specialization
+
+        -   전문화, 특수화
+
+        -   WelcomeDialog는 Dialog의 특별한 케이스이다.
+
+        -   기존의 객체지향 언어에서는 상속을 사용하여 Specialization을 구현
+
+        -   React에서는 Composition을 사용하여 Specialization을 구현
+
+        -   ```react
+            // title, message를 prop으로 받아서 렌더링
+            function Dialog(props) {
+                return (
+                	<FancyBorder color="blue">
+                    	<h1 className="Dialog-title">
+                        	{props.title}
+                        </h1>
+                        <p className="Dialog-message">
+                        	{props.message}
+                        </p>
+                    </FancyBorder>
+                );
+            }
+            
+            // title, message를 prop으로 전달
+            function WelcomeDialog() {
+                return (
+                	<Dialog
+                        title="Welcome"
+                        massage="Thank you for visiting our spacecraft!" />
+                );
+            }
+            ```
+
+    -   Containment와 Specialization을 같이 사용해보기
+
+-   상속
+
+    -   다른 컴포넌트로부터 상속을 받아서 새로운 컴포넌트를 만드는 것
+    -   페이스북에서, 수천개의 React 컴포넌트를 사용했지만, 상속을 사용해서 컴포넌트를 만드는 것을 추천할만한 Use Case를 찾지 못했다 -> 상속을 사용할 필요가 없다
+    -   복잡한 컴포넌트를 쪼개서 여러개의 컴포넌트로 만들고, 만든 컴포넌트들을 조합해서 새로운 컴포넌트를 만들자!
 
