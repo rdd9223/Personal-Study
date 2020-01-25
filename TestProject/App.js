@@ -111,15 +111,54 @@ import { StyleSheet, Text, View } from 'react-native';
 //     }
 // }
 
-// #5 고정치수
-export default class FixedDimensionsBasics extends Component {
-    render() {
-        return (
-            <View>
-                <View style={{width: 50, height: 50, backgroundColor: 'powderblue'}} />
-                <View style={{width: 100, height: 100, backgroundColor: 'skyblue'}} />
-                <View style={{width: 150, height: 150, backgroundColor: 'steelblue'}} />
-            </View>
-        )
-    }
-}
+// #5-1 고정치수
+// export default class FixedDimensionsBasics extends Component {
+//     render() {
+//         return (
+//             <View>
+//                 <View style={{width: 50, height: 50, backgroundColor: 'powderblue'}} />
+//                 <View style={{width: 100, height: 100, backgroundColor: 'skyblue'}} />
+//                 <View style={{width: 150, height: 150, backgroundColor: 'steelblue'}} />
+//             </View>
+//         )
+//     }
+// }
+
+// #5-2 플렉스 치수
+// export default class FlexDimensionsBasics extends Component {
+//     render() {
+//         // Try removing the 'flex: 1' on the parent View.
+//         // The parent will not have dimensions, so the children can't expand.
+//         // What if you add `height: 300` instead of `flex: 1`?
+//         return (
+//             <View style={{flex: 1}}>
+//                 <View style={{flex: 1, backgroundColor: 'powderblue'}} />
+//                 <View style={{flex: 2, backgroundColor: 'skyblue'}} />
+//                 <View style={{flex: 3, backgroundColor: 'steelblue'}} />
+//             </View>
+//         )
+//     }
+// }
+
+// #6 Flexbox를 사용한 레이아웃
+//
+// row를 주축으로 50씩 그라데이션을 줌
+// row: 왼쪽에서 오른쪽으로
+// column(default): 위에서 아래로, 줄바꿈이 활성화 된 경우 왼쪽 첫 번째 항목부터 시작
+// row-reverse: 오른쪽에서 왼쪽으로
+// column: 아래에서 위쪽으로
+//
+// export default class FlexDirectionBasics extends Component {
+//     render() {
+//         return (
+//             // try setting `flexDirection` to `column`
+//             <View style={{flex:1, flexDirection: 'row'}}>
+//                 <View style={{width: 50, height: 50, backgroundColor: 'powderblue'}} />
+//                 <View style={{width: 50, height: 50, backgroundColor: 'skyblue'}} />
+//                 <View style={{width: 50, height: 50, backgroundColor: 'steelblue'}} />
+//             </View>
+//         )
+//     }
+// }
+
+//
