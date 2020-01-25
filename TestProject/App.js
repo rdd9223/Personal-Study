@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, TextInput } from 'react-native';
 
 // #1 기본사항 배우기
 // export default class HelloWorldApp extends Component {
@@ -161,4 +161,76 @@ import { StyleSheet, Text, View } from 'react-native';
 //     }
 // }
 
+// #6-1 레이아웃 방향
+// LTR(default): 왼쪽에서 오른쪽으로 배치
+// RTL: 오른쪽에서 왼쪽으로 배치
+// flex-start: 컨테이너의 하위축을 컨테이너의 기본축 시작부분에 맞츰
+// flex-end: 컨테이너의 하위축을 컨테이너의 마지막 부분에 맞춤
+// center: 컨테이너의 주축 중심에 컨테이너의 하위축을 맞춤
+// space-between: 컨테이너의 주축을 가로지르는 공간이 고르게 분배되어 자식간의 공간이 균일해진다
+// space-around: 자식과 축이 양쪽으로 똑같은 너비를 가지도록 분배된다.
+// space-evenly: 주축을 따라 정렬 컨테이너 내에 고르게 분포됨
+// export default class JustifyContentBasics extends Component {
+//     render() {
+//         return (
+//             // Try setting `justifyContent` to `center`.
+//             // Try setting `flexDirection` to `row`.
+//             <View style={{ flex:1, flexDirection: `row`, justifyContent: `center`,}}>
+//                 <View style={{width: 50, height: 50, backgroundColor: 'powderblue'}} />
+//                 <View style={{width: 50, height: 50, backgroundColor: 'skyblue'}} />
+//                 <View style={{width: 50, height: 50, backgroundColor: 'steelblue'}} />
+//             </View>
+//         )
+//     }
+// }
+
+// #6-2 레이아웃 항목 정렬
+// alignItems 컨테이너의 가로축을 따라 자식을 정렬하는 방법을 설명.
+// stretch: height 컨테이너의 가로 축과 일치하도록 컨테이너의 자식을 늘린다.
+// flex-start: 컨테이너의 자식을 컨테이너의 교차 축 시작에 맞춘다.
+// flex-end: 컨테이너의 자식을 컨테이너의 가로 축 끝에 맞춘다.
+// center: 컨테이너의 자식을 컨테이너의 가로 출 가운데에 맞춘다
+// baseline: 공통 기준선을 따라 컨테이너의 자식을 정렬한다. 개별 자식을 부모의 기준선으로 설정할 수 있다.
+// export default class AlignitemsBasics extends Component {
+//     render() {
+//         return (
+//             // Try setting `alignItems` to 'flex-start'
+//             // Try setting `justifyContent` to `flex-end`.
+//             // Try setting `flexDirection` to `row`.
+//             <View style={{
+//                 flex: 1,
+//                 flexDirection: 'column',
+//                 justifyContent: 'center',
+//                 alignItems: 'stretch',
+//             }}>
+//                 <View style={{width: 50, height: 50, backgroundColor: 'powderblue'}} />
+//                 <View style={{height: 50, backgroundColor: 'skyblue'}} />
+//                 <View style={{height: 100, backgroundColor: 'steelblue'}} />
+//             </View>
+//         )
+//     }
+// }
+
+// #7 텍스트 입력 처리
+// export default class PizzaTranslator extends Component {
+//     constructor(props) {
+//         super(props);
+//         this.state = {text: ''};
+//     }
 //
+//     render() {
+//         return (
+//             <View style={{padding: 10}}>
+//                 <TextInput
+//                     style={{height: 40}}
+//                     placeholder="Type here to translate!"
+//                     onChangeText={(text) => this.setState({text})}
+//                     value={this.state.text}
+//                 />
+//                 <Text style={{padding: 10, fontSize: 42}}>
+//                     {this.state.text.split(' ').map((word) => word && '🍕').join(' ')}
+//                 </Text>
+//             </View>
+//         );
+//     }
+// }
