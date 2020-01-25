@@ -234,3 +234,5 @@ import { StyleSheet, Text, View, TextInput } from 'react-native';
 //         );
 //     }
 // }
+
+// #8 터치 취급
