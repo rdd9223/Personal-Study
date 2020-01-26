@@ -69,6 +69,8 @@ const App: () => React$Node = () => {
         </ScrollView>
       </SafeAreaView>
     </>
+
+
   );
 };
 
