@@ -1,8 +1,16 @@
 import React, { Component } from 'react';
 import { StyleSheet, Text, View, TextInput } from 'react-native';
+import { createAppContainer} from "react-navigation";
+import { createStackNavigator} from "react-navigation-stack"
+import MainScreen from "./Components/MainScreen";
 
-import Components from './Components/index';
+const AppStackNavigator = createStackNavigator({
+    Main: {
+        screen: MainScreen  // MainScreen 컴포넌트를 네비게이터에 등록
+    }
+});
 
+export default createAppContainer(AppStackNavigator);
 // #1 기본사항 배우기
 // export default class HelloWorldApp extends Component {
 //     render() {
