@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { StyleSheet, Text, View, TextInput } from 'react-native';
 
+import Components from './Components/index';
+
 // #1 기본사항 배우기
 // export default class HelloWorldApp extends Component {
 //     render() {
