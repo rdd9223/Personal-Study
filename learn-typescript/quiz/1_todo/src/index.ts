@@ -1,9 +1,22 @@
+// type과 interface로 타입정의시 코드중복을 최소화 할 수 있다. interface를 사용하는 것이 더 좋다. 이유는 다음 챕터에서 알아보자.
+// type Todo = {
+//   id: number;
+//   title: string;
+//   done: boolean;
+// }
+
+interface Todo {
+  id: number;
+  title: string;
+  done: boolean;
+}
+
 // let todoItems: Array<object>; // object[]
-let todoItems: {id: number, title: string, done: boolean}[];
+let todoItems: Todo[];
 
 // api -> 실제 api는 axios로 할 것이다. 하지만 지금 예는 얼마나 잘 타입스크립트를 잘 조정할 것인지 하기위해 간단하게 만들었다.
-function fetchTodoItems(): {id: number, title: string, done: boolean}[] {
-  const todos: Array<{id: number, title: string, done: boolean}> = [
+function fetchTodoItems(): Todo[] {
+  const todos: Array<Todo> = [
     { id: 1, title: '안녕', done: false },
     { id: 2, title: '타입', done: false },
     { id: 3, title: '스크립트', done: false },
@@ -17,7 +30,7 @@ function fetchTodos(): Array<object> {
   return todos;
 }
 
-function addTodo(todo: {id: number, title: string, done: boolean}): void {  // 구체적으로 정의를 해야지 todo의 오류가 사라진다.
+function addTodo(todo: Todo): void {  // 구체적으로 정의를 해야지 todo의 오류가 사라진다.
   todoItems.push(todo);
 }
 
@@ -26,7 +39,7 @@ function deleteTodo(index: number): void {
 }
 
 // todo 파라미터의 모습이 object로 선언하면 done이 있는지 없는지 모른다.
-function completeTodo(index: number, todo: {id: number, title: string, done: boolean}): void {
+function completeTodo(index: number, todo: Todo): void {
   todo.done = true;
   todoItems.splice(index, 1, todo);
 }
