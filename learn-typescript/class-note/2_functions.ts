@@ -11,7 +11,7 @@ function add(): number {
 }
 
 // 함수의 타입을 정의하는 방식(기본적인 방식)
-function sum1(a:number, b: number): number {
+function sum1(a: number, b: number): number {
   return a + b;
 }
 
