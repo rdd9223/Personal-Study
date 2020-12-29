@@ -46,4 +46,29 @@ interface StringArray {
 
 var arr: StringArray = ["a", "b", "c"];
 // arr[0]; // 'a'
-arr[0] = 11; // error
+// arr[0] = 11; // error
+
+// 빨간 줄 뜬거 이후 코드는 타입스크립트가 제대로 인지하지 못할 수 있다.
+// 그래서 그때그때 주석처리 해주자
+
+// 딕셔너리 패턴
+// 키에 해당하는 값을 먼저 타입선언
+// RegExp: 정규표현식 생성자 타입
+interface StringRegexDictionary {
+  [key: string]: RegExp;
+}
+
+// 정규식으로 들어오는 객체의 타입을 정의해보자
+var obj2: StringRegexDictionary = {
+  // sth: /abc/,
+  // 밸류값에 정규식을 입력하지 않았기 때문에 오류가 남
+  // cssFile: 'css'
+  cssFile: /\.css$/,
+  jsFile: /\.js$/,
+};
+obj2["cssFile"] = "a"; // 정규식이 아니기 때문에 에러남!
+
+// 딕셔너리 인터페이스의 장점은 이와같은 함수를 사용할 때, value값의 타입추론을 알아서 해준다는 것이다.
+Object.keys(obj2).forEach(function (value) {
+  //...
+});
