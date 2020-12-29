@@ -72,3 +72,22 @@ obj2["cssFile"] = "a"; // 정규식이 아니기 때문에 에러남!
 Object.keys(obj2).forEach(function (value) {
   //...
 });
+
+// 인터페이스 확장
+// 프로토타입, 상속같이 인터페이스를 상속받아서 더 상속받아서 확장하는 것
+interface Person {
+  name: string;
+  age: number;
+}
+
+// extends를 통해 상속을 받을 수 있다.
+interface Developer extends Person {
+  language: string;
+}
+
+// Person과 Developer의 모든 속성을 입력해야 한다.
+var capt1: Developer = {
+  language: "ts",
+  age: 100,
+  name: "캡틴",
+};
