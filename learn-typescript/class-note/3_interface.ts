@@ -37,3 +37,13 @@ var sum: SumFunction;
 sum = function (a: number, b: number): number {
   return a + b;
 };
+
+// 인덱싱
+// 인덱스로 접근해서 string이 들어있다고 정의
+interface StringArray {
+  [index: number]: string;
+}
+
+var arr: StringArray = ["a", "b", "c"];
+// arr[0]; // 'a'
+arr[0] = 11; // error
