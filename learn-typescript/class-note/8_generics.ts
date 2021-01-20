@@ -28,16 +28,26 @@
 // }
 
 // 유니온 타입!
-function logText(text: string | number) {
+// function logText(text: string | number) {
+//   console.log(text);
+//   // text.split('').reverse().join(''); // string이니까 가능한 메소드
+//   // text. // 문제점은 text를 쳤을때 나오는 메소드가 string과 number에 해당하는 메소드가 다 나온다는것!
+//   return text;
+// }
+
+// 이렇게 다양한 타입을 받을 수 있는 이유는 우리가 타입을 정의하지 않았기 때문에(any)
+// const a = logText("app"); // 유니온으로 받기 때문에 리턴도 스트링이거나 넘버가 된다. 이것도 문제이다.
+// a.split(); // a가 string이거나 number이기 때문에 문자열을 넣고 문자열로 리턴받더라도 string메소드를 사용하지 못한다.
+// logText(10);
+// const num = logNumber(10);
+// logText(true);
+
+function logText<T>(text: T): T {
   console.log(text);
-  // text.split('').reverse().join(''); // string이니까 가능한 메소드
-  // text. // 문제점은 text를 쳤을때 나오는 메소드가 string과 number에 해당하는 메소드가 다 나온다는것!
   return text;
 }
 
-// 이렇게 다양한 타입을 받을 수 있는 이유는 우리가 타입을 정의하지 않았기 때문에(any)
-const a = logText("app"); // 유니온으로 받기 때문에 리턴도 스트링이거나 넘버가 된다. 이것도 문제이다.
-a.split(); // a가 string이거나 number이기 때문에 문자열을 넣고 문자열로 리턴받더라도 string메소드를 사용하지 못한다.
-logText(10);
-// const num = logNumber(10);
-// logText(true);
+const str1 = logText<string>("a"); // string으로 함수를 실행하겠다고 선언했기 때문에 리턴값도 string이 된다.
+str1.split(""); // 이런식으로 string에 해당하는 메소드를 사용할 수 있다.
+const login = logText<boolean>(true);
+// 원래였으면 타입만 다른 두개의 함수를 작성해야하지만 제네릭을 이용한 하나의 함수로 구현했다.
