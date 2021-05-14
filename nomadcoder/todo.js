@@ -11,6 +11,18 @@ function saveToDos() {
 }
 
 function paintToDo(text) {
+  const li = document.createElement("li");
+  const delBtn = document.createElement("button");
+  const span = document.createElement("span");
+  const newId = toDos.length + 1;
+
+  delBtn.innerText = "❌";
+  span.innerText = text;
+  li.appendChild(delBtn);
+  li.appendChild(span);
+  li.id = newId;
+  toDoList.appendChild(li);
+
   const toDoObj = {
     text: text,
     id: newId, // 인덱스를 동적으로 넣어줌
