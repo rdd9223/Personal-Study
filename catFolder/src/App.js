@@ -2,6 +2,7 @@ import Breadcrumb from "./components/Breadcrumb.js";
 import Node from "./components/Node.js";
 import ImageView from "./components/ImageView.js";
 import { getData } from "./libs/api.js";
+import Loading from "./components/Loading.js";
 
 export default class App {
   constructor($app) {
@@ -9,6 +10,7 @@ export default class App {
 
     this.state = {
       isRoot: true,
+      isLoading: false,
       selectedFilePath: "",
       nodes: [],
       depth: [],
@@ -75,6 +77,8 @@ export default class App {
 
     this.imageView = new ImageView({ $app, initialState: this.state.selectedFilePath });
 
+    this.loading = new Loading({ $app, initialState: this.state.isLoading });
+
     this.init();
   }
 
@@ -86,10 +90,15 @@ export default class App {
       isRoot: this.state.isRoot,
     });
     this.imageView.setState(this.state.selectedFilePath);
+    this.loading.setState(this.state.isLoading);
   }
 
   async init() {
     try {
+      this.setState({
+        ...this.state,
+        isLoading: true,
+      });
       const fetchedData = await getData();
       this.setState({
         ...this.state,
@@ -98,6 +107,11 @@ export default class App {
       });
     } catch (e) {
       console.log(e);
+    } finally {
+      this.setState({
+        ...this.state,
+        isLoading: false,
+      });
     }
   }
 }
