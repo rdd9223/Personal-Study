@@ -29,6 +29,10 @@ export default class App {
       },
       onClick: async (node) => {
         try {
+          this.setState({
+            ...this.state,
+            isLoading: true,
+          });
           if (node.type === "DIRECTORY") {
             const nextNodes = await getData(node.id);
             this.setState({
@@ -45,6 +49,11 @@ export default class App {
           }
         } catch (e) {
           console.log(e);
+        } finally {
+          this.setState({
+            ...this.state,
+            isLoading: false,
+          });
         }
       },
       onBackClick: async () => {
@@ -54,8 +63,12 @@ export default class App {
 
           const prevNodeId = nextState.depth.length === 0 ? null : nextState.depth[nextState.depth.length - 1].id;
 
+          this.setState({
+            ...this.state,
+            isLoading: true,
+          });
+
           if (prevNodeId === null) {
-            const rootNode = await getData();
             this.setState({
               ...nextState,
               isRoot: true,
@@ -71,6 +84,11 @@ export default class App {
           }
         } catch (e) {
           console.log(e);
+        } finally {
+          this.setState({
+            ...this.state,
+            isLoading: false,
+          });
         }
       },
     });
@@ -84,13 +102,13 @@ export default class App {
 
   setState(nextState) {
     this.state = nextState;
+    this.loading.setState(this.state.isLoading);
     this.breadcrumb.setState(this.state.depth);
     this.node.setState({
       nodes: this.state.nodes,
       isRoot: this.state.isRoot,
     });
     this.imageView.setState(this.state.selectedFilePath);
-    this.loading.setState(this.state.isLoading);
   }
 
   async init() {
