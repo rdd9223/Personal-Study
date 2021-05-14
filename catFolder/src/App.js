@@ -26,6 +26,7 @@ export default class App {
           this.setState({
             ...this.state,
             depth: [],
+            isRoot: true,
             nodes: cache.rootNode,
           });
           return;
