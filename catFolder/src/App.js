@@ -4,6 +4,8 @@ import ImageView from "./components/ImageView.js";
 import { getData } from "./libs/api.js";
 import Loading from "./components/Loading.js";
 
+const cache = {};
+
 export default class App {
   constructor($app) {
     this.$app = $app;
@@ -34,13 +36,23 @@ export default class App {
             isLoading: true,
           });
           if (node.type === "DIRECTORY") {
-            const nextNodes = await getData(node.id);
-            this.setState({
-              ...this.state,
-              depth: [...this.state.depth, node],
-              isRoot: false,
-              nodes: nextNodes,
-            });
+            if (cache[node.id]) {
+              this.setState({
+                ...this.state,
+                depth: [...this.state.depth, node],
+                isRoot: false,
+                nodes: cache[node.id],
+              });
+            } else {
+              const nextNodes = await getData(node.id);
+              this.setState({
+                ...this.state,
+                depth: [...this.state.depth, node],
+                isRoot: false,
+                nodes: nextNodes,
+              });
+              cache[node.id] = nextNodes;
+            }
           } else if (node.type === "FILE") {
             this.setState({
               ...this.state,
@@ -56,7 +68,7 @@ export default class App {
           });
         }
       },
-      onBackClick: async () => {
+      onBackClick: () => {
         try {
           const nextState = { ...this.state };
           nextState.depth.pop();
@@ -72,14 +84,13 @@ export default class App {
             this.setState({
               ...nextState,
               isRoot: true,
-              nodes: rootNode,
+              nodes: cache.rootNode,
             });
           } else {
-            const prevNode = await getData(prevNodeId);
             this.setState({
               ...nextState,
               isRoot: false,
-              nodes: prevNode,
+              nodes: cache[prevNodeId],
             });
           }
         } catch (e) {
@@ -123,6 +134,7 @@ export default class App {
         isRoot: true,
         nodes: fetchedData,
       });
+      cache.rootNode = fetchedData;
     } catch (e) {
       console.log(e);
     } finally {
