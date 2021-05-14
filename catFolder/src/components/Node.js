@@ -1,9 +1,10 @@
 export default class Node {
-  constructor({ $app, initialState, onClick }) {
+  constructor({ $app, initialState, onClick, onBackClick }) {
     this.state = initialState;
     this.$target = document.createElement("div");
     this.$target.className = "Nodes";
     this.onClick = onClick;
+    this.onBackClick = onBackClick;
 
     $app.appendChild(this.$target);
     this.render();
@@ -36,6 +37,9 @@ export default class Node {
       this.$target.querySelectorAll(".Node").forEach(($node) => {
         $node.addEventListener("click", (e) => {
           const { nodeId } = e.target.dataset;
+          if (!nodeId) {
+            this.onBackClick();
+          }
           const selectedNode = this.state.nodes.find((node) => node.id === nodeId);
 
           if (selectedNode) {

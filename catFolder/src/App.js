@@ -45,6 +45,32 @@ export default class App {
           console.log(e);
         }
       },
+      onBackClick: async () => {
+        try {
+          const nextState = { ...this.state };
+          nextState.depth.pop();
+
+          const prevNodeId = nextState.depth.length === 0 ? null : nextState.depth[nextState.depth.length - 1].id;
+
+          if (prevNodeId === null) {
+            const rootNode = await getData();
+            this.setState({
+              ...nextState,
+              isRoot: true,
+              nodes: rootNode,
+            });
+          } else {
+            const prevNode = await getData(prevNodeId);
+            this.setState({
+              ...nextState,
+              isRoot: false,
+              nodes: prevNode,
+            });
+          }
+        } catch (e) {
+          console.log(e);
+        }
+      },
     });
 
     this.imageView = new ImageView({ $app, initialState: this.state.selectedFilePath });
