@@ -17,7 +17,6 @@ export default class ImageView {
   }
 
   render() {
-    console.log(this.state);
     this.$target.innerHTML = `
         <div class="content">
             ${this.state ? `<img src="${IMAGE_PATH_PREFIX}${this.state}" />` : ""}
