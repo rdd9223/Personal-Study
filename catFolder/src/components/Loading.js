@@ -1,6 +1,5 @@
 export default class Loading {
   constructor({ $app, initialState }) {
-    this.$app = $app;
     this.state = initialState;
     this.$target = document.createElement("div");
     this.$target.className = "Loading";

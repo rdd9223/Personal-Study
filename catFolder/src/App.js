@@ -113,13 +113,13 @@ export default class App {
 
   setState(nextState) {
     this.state = nextState;
-    this.loading.setState(this.state.isLoading);
     this.breadcrumb.setState(this.state.depth);
     this.node.setState({
       nodes: this.state.nodes,
       isRoot: this.state.isRoot,
     });
     this.imageView.setState(this.state.selectedFilePath);
+    this.loading.setState(this.state.isLoading);
   }
 
   async init() {
