@@ -128,7 +128,16 @@ export default class App {
       },
     });
 
-    this.imageView = new ImageView({ $app, initialState: this.state.selectedFilePath });
+    this.imageView = new ImageView({
+      $app,
+      initialState: this.state.selectedFilePath,
+      onClick: () => {
+        this.setState({
+          ...this.state,
+          selectedFilePath: "",
+        });
+      },
+    });
 
     this.loading = new Loading({ $app, initialState: this.state.isLoading });
 
